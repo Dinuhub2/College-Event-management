@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>College Event Management</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        background: #f5f5f5;
+    }
+
+    /* Navbar */
+    .navbar {
+        background: #222;
+        padding: 15px;
+        color: #fff;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    /* Sections */
+    section {
+        padding: 40px;
+        margin: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ccc;
+    }
+
+    h2 {
+        color: #ff4444;
+        margin-bottom: 10px;
+    }
+
+    /* Clubs */
+    .clubs {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .club-card {
+        width: 250px;
+        background: #222;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* Events List */
+    .event-card {
+        padding: 15px;
+        background: #eee;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    /* Registration Form */
+    input, textarea, button {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        font-size: 16px;
+    }
+
+    button {
+        background: #ff4444;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Countdown */
+    #countdown {
+        font-size: 28px;
+        color: #222;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="navbar">🎓 College Event Management Portal</div>
+
+<!-- Clubs Section -->
+<section>
+    <h2>🏛 Club Pages</h2>
+    <div class="clubs">
+        <div class="club-card">
+            <h3>Coding Club</h3>
+            <p>Workshops | Hackathons | Projects</p>
+        </div>
+
+        <div class="club-card">
+            <h3>Photography Club</h3>
+            <p>Photo Walk | Editing | Contests</p>
+        </div>
+
+        <div class="club-card">
+            <h3>Cultural Club</h3>
+            <p>Dance | Drama | Music</p>
+        </div>
+    </div>
+</section>
+
+<!-- Events List -->
+<section>
+    <h2>📅 Upcoming Events</h2>
+
+    <div class="event-card">
+        <h3>Technical Fest – “Tech Utsav 2025”</h3>
+        <p>Date: 25 February 2025</p>
+    </div>
+
+    <div class="event-card">
+        <h3>Photography Masterclass</h3>
+        <p>Date: 10 March 2025</p>
+    </div>
+
+    <div class="event-card">
+        <h3>Cultural Night</h3>
+        <p>Date: 20 April 2025</p>
+    </div>
+</section>
+
+<!-- Countdown Timer -->
+<section>
+    <h2>⏳ Countdown to Tech Utsav 2025</h2>
+    <div id="countdown">Loading...</div>
+</section>
+
+<!-- Registration Form -->
+<section>
+    <h2>📝 Event Registration Form</h2>
+
+    <form id="regForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email ID" required>
+        <input type="text" placeholder="Department" required>
+        <textarea placeholder="Why do you want to join this event?" required></textarea>
+        <button type="submit">Register</button>
+    </form>
+
+    <p id="msg" style="color: green; font-size: 18px;"></p>
+</section>
+
+<script>
+/* ---------------- Countdown Timer ---------------- */
+function startCountdown() {
+    const eventDate = new Date("Feb 25, 2025 00:00:00").getTime();
+
+    setInterval(() => {
+        let now = new Date().getTime();
+        let diff = eventDate - now;
+
+        if (diff < 0) {
+            document.getElementById("countdown").innerHTML = "Event Started!";
+            return;
+        }
+
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+            `${days}d : ${hours}h : ${mins}m : ${secs}s`;
+    }, 1000);
+}
+
+startCountdown();
+
+/* ---------------- Registration Form Message ---------------- */
+document.getElementById("regForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("msg").innerHTML = "🎉 Registration Successful!";
+    this.reset();
+});
+</script>
+
+</body>
+</html>
